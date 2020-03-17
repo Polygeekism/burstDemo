@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 export interface Workout {
   id?: string,
   name: string,
-  notes: string
+  notes: string,
+  totalWeight: number
 }
  
 @Injectable({
@@ -48,7 +49,7 @@ export class WorkoutService {
   }
  
   updateWorkout(workout: Workout): Promise<void> {
-    return this.workoutCollection.doc(workout.id).update({ name: workout.name, notes: workout.notes });
+    return this.workoutCollection.doc(workout.id).update({ name: workout.name, notes: workout.notes, totalWeight: workout.totalWeight });
   }
  
   deleteWorkout(id: string): Promise<void> {

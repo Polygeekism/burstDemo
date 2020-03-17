@@ -12,7 +12,8 @@ export class WorkoutDetailsPage implements OnInit {
  
   workout: Workout = {
     name: '',
-    notes: ''
+    notes: '',
+    totalWeight:0
   };
  
   constructor(private activatedRoute: ActivatedRoute, private workoutService: WorkoutService,

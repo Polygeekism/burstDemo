@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="secondary">
     <ion-title>My workouts</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,7 +13,7 @@
  
   <ion-list>
     <ion-item button [routerLink]="['/workout', workout.id]" *ngFor="let workout of (workouts | async)">
-      {{ workout.name }}
+      {{ workout.name }} {{workout.totalWeight}}
     </ion-item>
   </ion-list>
 </ion-content>
