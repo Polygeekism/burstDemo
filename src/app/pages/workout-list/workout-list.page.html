@@ -6,14 +6,15 @@
  
 <ion-content>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button routerLink="/workout">
+    <ion-fab-button routerLink="/workout" color="secondary">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
  
   <ion-list>
     <ion-item button [routerLink]="['/workout', workout.id]" *ngFor="let workout of (workouts | async)">
-      {{ workout.name }} {{workout.totalWeight}}
+      <ion-label>{{ workout.name }}</ion-label>
+      <ion-note slot="end">{{workout.totalWeight}}</ion-note> 
     </ion-item>
   </ion-list>
 </ion-content>
