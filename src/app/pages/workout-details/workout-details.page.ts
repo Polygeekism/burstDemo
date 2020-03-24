@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkoutService, Workout } from 'src/app/services/workout.service';
 import { ToastController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
  
 @Component({
   selector: 'app-workout-details',
@@ -9,6 +10,8 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./workout-details.page.scss'],
 })
 export class WorkoutDetailsPage implements OnInit {
+  public myForm: FormGroup;
+  private exerciseCount = 1;
  
   workout: Workout = {
     name: '',
@@ -17,9 +20,24 @@ export class WorkoutDetailsPage implements OnInit {
   };
  
   constructor(private activatedRoute: ActivatedRoute, private workoutService: WorkoutService,
-    private toastCtrl: ToastController, private router: Router) { }
+    private toastCtrl: ToastController, private router: Router, private formBuilder: FormBuilder) {
+
+      this.myForm = formBuilder.group({
+        exercise1:['', Validators.required]
+      });
+     }
  
   ngOnInit() { }
+
+  addControl(){
+    this.exerciseCount++;
+    this.myForm.addControl('exercise' + this.exerciseCount, new FormControl('', Validators.required));
+    console.log('myform values', this.myForm);
+  }
+
+  removeControl(control){
+    this.myForm.removeControl(control.key);
+  }
  
   ionViewWillEnter() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');

@@ -8,7 +8,7 @@
 </ion-header>
  
 <ion-content padding>
- 
+
   <ion-item>
     <ion-label position="stacked">Name</ion-label>
     <ion-input [(ngModel)]="workout.name"></ion-input>
@@ -22,7 +22,19 @@
     <ion-label position="stacked">Total Weight</ion-label>
     <ion-input type="number" [(ngModel)]="workout.totalWeight"></ion-input>
   </ion-item>
+  <ion-list lines="none" *ngIf="!workout.id">
+    <form [formGroup]="myForm">
+      <ion-item *ngFor="let control of myForm.controls | keyvalue">
+        <ion-input required type="text" [formControlName]="control.key" placeHolder="exercise"></ion-input>
+        <ion-input required type="number" placeHolder="weight lifted"></ion-input>
+        <ion-icon (click)="removeControl(control)" name="close-circle"></ion-icon>
+      </ion-item>
+    </form>
+    <ion-button expand="full" color="light" (click)="addControl()">Add Exercise</ion-button>
+  </ion-list>
 </ion-content>
+
+
  
 <ion-footer *ngIf="!workout.id">
   <ion-toolbar color="success">
